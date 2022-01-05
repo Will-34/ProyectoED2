@@ -3,6 +3,7 @@ package Graph;
 public class Lista {    //ADT Lista (Ordenada y sin duplicados).
     private Nodo L;
     private int n;
+    public int tipo ; // entrada salida
     
     public Lista(){
         L = null;
@@ -25,15 +26,15 @@ public class Lista {    //ADT Lista (Ordenada y sin duplicados).
             L = nuevo;
             n++;
         }
-        else
+        else{
             if (Ant.getData() != x){    //x no está en la lista.  Insertarlo entre Ant y p
                 nuevo = new Nodo(x);
                 Ant.setLink(nuevo);
                 nuevo.setLink(p);
                 n++;
             }
+        }
     }
-    
     public void del(int x){     //Elimina x de la Lista, si existe.
         Nodo Ant = null;
         Nodo p   = L;
@@ -79,6 +80,20 @@ public class Lista {    //ADT Lista (Ordenada y sin duplicados).
         
         System.err.println("Lista.get: Fuera de rango");
         return -1;
+    }
+    public Nodo getNodo(int k){  //Devuelve el k-ésimo elemento de la lista k=0, 1, ..., length()-1 
+        Nodo p=L;
+        int i=0;
+        while (p != null){
+            if (i==k)
+                return p;
+            
+            p = p.getLink();
+            i++;
+        }
+        
+        System.err.println("Lista.get: Fuera de rango");
+        return null;
     }
     
     public int length(){

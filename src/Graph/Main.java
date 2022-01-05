@@ -8,6 +8,7 @@ public class Main {
        G.addVertice();
        G.addVertice();
        G.addVertice();
+       
        G.addArista(0, 1);
        G.addArista(0, 2);
        G.addArista(2, 2);

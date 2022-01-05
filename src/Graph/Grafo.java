@@ -4,15 +4,56 @@ import java.util.LinkedList;
 
 public class Grafo {  //Grafo NO-Dirigido
     private static final int MAXVERTEX = 49;    //Máximo índice de V[]
-  
-    private Lista V[];
+    private Lista[] V;
     private int n;       //"Dimensión" de V[]
+    
+    private Coordenada[] coordenadas;
    
     public Grafo(){
        V = new Lista[MAXVERTEX+1];      //V[0..MAXVERTEX]
        n = -1;
        
        marca = new boolean[MAXVERTEX+1];    //Iniciar la ED para el marcado de los vértices.
+       coordenadas = new Coordenada[MAXVERTEX+1];    //Iniciar la ED para el marcado de los vértices.
+    }
+    
+    public Lista[] getVertices(){
+        return V;
+    }
+    public int getUltimaPosVertices(){
+        return n;
+    }
+    public void setEntrada(int v){
+        for (int i = 0; i <= n; i++) {
+            if(V[i].tipo==1 && i!=v){
+                V[i].tipo=0;
+                break;
+            }
+        }
+        V[v].tipo=1;
+    }
+    public int getEntrada(){
+        for (int i = 0; i <= n; i++) {
+            if(V[i].tipo==1 ){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public void setSalida(int v){
+//        int sum=0;
+        for (int i = 0; i <= n; i++) {
+            if(V[i].tipo==2 && i!=v){
+                V[i].tipo=0;
+                break;
+//                sum++;
+            }
+        }
+//        if(sum+1<=2){
+//        }
+        V[v].tipo=2;
+        
     }
     
     public void addVertice(){
@@ -34,14 +75,25 @@ public class Grafo {  //Grafo NO-Dirigido
         return (0<=v && v<=n);
     }
     
+    public void setTrampaArista(int u, int v){
+        String metodo="set Trampa";
+        if (!isVerticeValido(u, metodo) || !isVerticeValido(v, metodo)){
+                return;     //No existe el vertice u o el vertice v.
+        }
+        
+        V[u].getNodo(v).setEsTrampa(true);
+        V[v].getNodo(u).setEsTrampa(true);
+    }
+    
     public void addArista(int u, int v){
         String metodo="addArista";
-        if (!isVerticeValido(u, metodo) || !isVerticeValido(v, metodo))
-            return;     //No existe el vertice u o el vertice v.
+        if (!isVerticeValido(u, metodo) || !isVerticeValido(v, metodo)){
+                return;     //No existe el vertice u o el vertice v.
+        }
         
         V[u].add(v);
         V[v].add(u);
-    } 
+    }
     
     public void delArista(int u, int v){
         String metodo="delArista";
@@ -200,5 +252,13 @@ public class Grafo {  //Grafo NO-Dirigido
     
     private boolean isMarcado(int u){   //Devuelve true sii el vertice u está marcado.
         return marca[u]; 
+    }
+    
+    public void setCoordenada(int v, int x, int y){
+        coordenadas[v].x=x;
+        coordenadas[v].y=y;
+    }
+    public Coordenada getCoordenada(int v){
+        return coordenadas[v];
     }
 }
