@@ -3,19 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juego;
-
+package Graph;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 /**
  *
  * @author Wilfredo
  */
-public class Juego extends javax.swing.JFrame {
+public class JuegoFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Juego() {
+    JuegoPintar juegopintar ;
+    JuegoRaton juegoraton;
+
+    public JuegoFrame() {
+        juegopintar = new JuegoPintar();
+        juegoraton = new JuegoRaton();
+        
         initComponents();
+        
     }
 
     /**
@@ -28,6 +36,16 @@ public class Juego extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -42,6 +60,31 @@ public class Juego extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        System.out.println("x:"+evt.getX());
+        System.out.println("y:"+evt.getY());
+        int x= evt.getX();
+        int y= evt.getY();
+        Graphics g = this.getGraphics();
+        
+        
+        
+        juegoraton.addCueva(x, y, g);
+        juegopintar.pintarVertice(x, y, g );
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        // TODO add your handling code here:
+//        System.out.println("x:"+evt.getX());
+//        System.out.println("y:"+evt.getY());
+//        int x= evt.getX();
+//        int y= evt.getY();
+      //   Graphics g = this.getGraphics();
+       // juegopintar.pintarVertice(x, y, g );
+    }//GEN-LAST:event_formMouseDragged
 
     /**
      * @param args the command line arguments
@@ -60,21 +103,23 @@ public class Juego extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Juego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JuegoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Juego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JuegoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Juego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JuegoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Juego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JuegoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Juego().setVisible(true);
+                new JuegoFrame().setVisible(true);
             }
         });
     }

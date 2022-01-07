@@ -3,25 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juego;
-
+package Graph;
+import java.awt.Graphics;
 import Graph.Grafo;
+import java.util.LinkedList;
+
 
 /**
  *
  * @author Wilfredo
  */
 public class JuegoRaton {
+
+   
     public Grafo mapa;
     public int raton = -1;
+    
+    public JuegoPintar pintar;
     
     public boolean finJuego;
     public boolean ratonVivo;
     
     // crear mapa
-    public void addCueva(int x, int y){
+     public JuegoRaton() {
+        this.mapa = new Grafo();
+    }
+ 
+    
+    public void addCueva(int x, int y,Graphics g){
+     
         mapa.addVertice();
-        mapa.setCoordenada(mapa.getUltimaPosVertices(), x, y);
+        mapa.printListas();
+        int z = mapa.getUltimaPosVertices();
+        mapa.setCoordenada(z, x, y);
+        
+      //  pintar.pintarVertice(x, y, g,z);
         System.out.println("añadido: "+x+" - "+y);
     }
     
@@ -71,6 +87,8 @@ public class JuegoRaton {
     
     public void pintarMapa(){
         //pintar los vertices
+        
+        
         //pintar las aristas
     }
     public void pintarJuego(){
@@ -78,6 +96,10 @@ public class JuegoRaton {
         //pintar las aristas
         //pintar raton
         //cambios para git
+        //git add*
+        //git commit -m "prueba"
+        //git pull origin master
+        //git push origin master
     }
     
 }
