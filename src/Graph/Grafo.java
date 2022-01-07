@@ -7,10 +7,7 @@ public class Grafo {  //Grafo NO-Dirigido
     private Lista[] V;
     private int n;       //"Dimensión" de V[]
     
-   
-    
     private Coordenada[] coordenadas;
-   
     public Grafo(){
        V = new Lista[MAXVERTEX+1];      //V[0..MAXVERTEX]
        n = -1;
@@ -21,6 +18,9 @@ public class Grafo {  //Grafo NO-Dirigido
     
     public Lista[] getVertices(){
         return V;
+    }
+    public Lista getVertice(int v){
+        return V[v];
     }
     public int getUltimaPosVertices(){
         return n;
@@ -258,15 +258,6 @@ public class Grafo {  //Grafo NO-Dirigido
     
     
     public void setCoordenada(int v, int x, int y){
-//        Coordenada punto = new Coordenada();
-//        System.out.println("x:"+x);
-//        System.out.println("y:"+y);
-//        System.out.println("v:"+v);
-//        
-//        punto.setX(x);
-//        punto.setY(y);
-//        this.coordenadas[v] = punto;
-
           this.coordenadas[v] = new Coordenada(x, y);
     }
     public Coordenada getCoordenada(int v){

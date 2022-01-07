@@ -19,7 +19,8 @@ public class JuegoRaton {
     public Grafo mapa;
     public int raton = -1;
     
-    public JuegoPintar pintar;
+    int posVerticeSeleccionado;
+    
     
     public boolean finJuego;
     public boolean ratonVivo;
@@ -27,19 +28,19 @@ public class JuegoRaton {
     // crear mapa
      public JuegoRaton() {
         this.mapa = new Grafo();
+        this.posVerticeSeleccionado=-1;
     }
  
     
-    public void addCueva(int x, int y,Graphics g){
+    public void addCueva(int x, int y){
      
         mapa.addVertice();
         mapa.printListas();
         int z = mapa.getUltimaPosVertices();
         mapa.setCoordenada(z, x, y);
-        
-      //  pintar.pintarVertice(x, y, g,z);
         System.out.println("añadido: "+x+" - "+y);
     }
+    
     
     public void moverVertice(int v, int x, int y){
         mapa.getCoordenada(v).x=x;
@@ -48,6 +49,7 @@ public class JuegoRaton {
     
     public void addTunel( int u, int v ){
         mapa.addArista(u,v);
+        mapa.printListas();
         
     }
     public void setTrampa( int u, int v ){
@@ -59,6 +61,8 @@ public class JuegoRaton {
     public void setSalida(int v){
         mapa.setSalida(v);
     }
+    
+    
     
     //
     
@@ -85,21 +89,6 @@ public class JuegoRaton {
         }
     }
     
-    public void pintarMapa(){
-        //pintar los vertices
-        
-        
-        //pintar las aristas
-    }
-    public void pintarJuego(){
-        //pintar los vertices
-        //pintar las aristas
-        //pintar raton
-        //cambios para git
-        //git add*
-        //git commit -m "prueba"
-        //git pull origin master
-        //git push origin master
-    }
+
     
 }

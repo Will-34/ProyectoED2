@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package Graph;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
 /**
  *
  * @author Wilfredo
@@ -15,15 +18,31 @@ public class JuegoFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    JuegoPintar juegopintar ;
-    JuegoRaton juegoraton;
+    public static int PINTAR_VERTICE = 1;
+    public static int PINTAR_ARISTA = 2;
+    public static int PINTAR_TRAMPA = 3;
 
+    Lienzo lienzo;
+    JuegoRaton juego;
+
+    boolean esPintarMapa;
+    int eventoPintar;
+
+    boolean esJugar;
+
+    public boolean esDragged;
+    
+    public int numClickArista;
+    
     public JuegoFrame() {
-        juegopintar = new JuegoPintar();
-        juegoraton = new JuegoRaton();
-        
+        lienzo = new Lienzo();
+        juego = new JuegoRaton();
+        esPintarMapa = false;
+        esJugar = false;
+        esDragged = false;
+        numClickArista=0;
         initComponents();
-        
+
     }
 
     /**
@@ -35,6 +54,14 @@ public class JuegoFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnNuevoMapa = new javax.swing.JButton();
+        btnIniciarJuego = new javax.swing.JButton();
+        btnVertices = new javax.swing.JButton();
+        btnAristas = new javax.swing.JButton();
+        btnTrampas = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -45,17 +72,105 @@ public class JuegoFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
         });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
+
+        btnNuevoMapa.setText("Nuevo Mapa");
+        btnNuevoMapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoMapaActionPerformed(evt);
+            }
+        });
+
+        btnIniciarJuego.setText("Jugar");
+
+        btnVertices.setText("Vertices");
+        btnVertices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerticesActionPerformed(evt);
+            }
+        });
+
+        btnAristas.setText("Aristas");
+        btnAristas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAristasActionPerformed(evt);
+            }
+        });
+
+        btnTrampas.setText("trampas");
+        btnTrampas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrampasActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnNuevoMapa))
+                    .addComponent(btnIniciarJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnVertices, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAristas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnTrampas)
+                            .addComponent(btnEliminar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNuevoMapa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVertices)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAristas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTrampas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addComponent(btnIniciarJuego)
+                .addGap(226, 226, 226))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 913, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 832, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -63,28 +178,145 @@ public class JuegoFrame extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        System.out.println("x:"+evt.getX());
-        System.out.println("y:"+evt.getY());
-        int x= evt.getX();
-        int y= evt.getY();
+        System.out.println("click x:" + evt.getX());
+        System.out.println("click y:" + evt.getY());
+        int x = evt.getX();
+        if(x<=120){
+            return;
+        }
+        x=x-120;
+        
+        int y = evt.getY();
         Graphics g = this.getGraphics();
-        
-        
-        
-        juegoraton.addCueva(x, y, g);
-        juegopintar.pintarVertice(x, y, g );
-        
+        if (esPintarMapa) {
+            if (eventoPintar == PINTAR_VERTICE) {
+                juego.addCueva(x, y);
+            }else if(eventoPintar==PINTAR_ARISTA){
+                if(numClickArista==0){
+                    juego.posVerticeSeleccionado = lienzo.buscarVertice(juego, x, y);
+                    if(juego.posVerticeSeleccionado>=0){
+                        numClickArista =1;
+                    }
+                }else if(numClickArista==1){
+                    int posVertice2 = lienzo.buscarVertice(juego, x, y);
+                    if(posVertice2>=0){
+                        juego.addTunel(juego.posVerticeSeleccionado, posVertice2);
+                        numClickArista=0;
+                        juego.posVerticeSeleccionado=-1;
+                    }
+                }
+            }else if(eventoPintar==PINTAR_TRAMPA){
+                
+            }else{// seleccionar
+                juego.posVerticeSeleccionado = lienzo.buscarVertice(juego, x,y);
+            }
+            lienzo.pintarMapa(juego,g);
+            
+        } else if (esJugar) {
+
+        }
+
+
     }//GEN-LAST:event_formMouseClicked
 
+    
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         // TODO add your handling code here:
-//        System.out.println("x:"+evt.getX());
-//        System.out.println("y:"+evt.getY());
-//        int x= evt.getX();
-//        int y= evt.getY();
-      //   Graphics g = this.getGraphics();
-       // juegopintar.pintarVertice(x, y, g );
+        if(!esPintarMapa){
+            return;
+        }
+        if(eventoPintar!=0){
+            return;
+        }
+        
+        
+        int x = evt.getX();
+        if(x<=120){
+            return;
+        }
+        x=x-120;
+        int y = evt.getY();
+        Graphics g = this.getGraphics();
+        if(!esDragged){
+            juego.posVerticeSeleccionado = lienzo.buscarVertice(juego, x,y);
+            esDragged=true;
+        }
+        if(juego.posVerticeSeleccionado>=0){
+            juego.moverVertice(juego.posVerticeSeleccionado, x, y);
+            lienzo.pintarMapa(juego, g);
+        }
     }//GEN-LAST:event_formMouseDragged
+
+    private void btnNuevoMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoMapaActionPerformed
+        this.esPintarMapa = true;
+        this.esJugar = false;
+        this.eventoPintar = 0;
+    }//GEN-LAST:event_btnNuevoMapaActionPerformed
+
+    private void btnVerticesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerticesActionPerformed
+        if (esPintarMapa) {
+            eventoPintar = eventoPintar != PINTAR_VERTICE ? PINTAR_VERTICE : 0;
+            PintarBtnEventos();
+        }
+    }//GEN-LAST:event_btnVerticesActionPerformed
+
+    private void btnAristasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAristasActionPerformed
+        if (esPintarMapa) {
+            eventoPintar = eventoPintar != PINTAR_ARISTA ? PINTAR_ARISTA : 0;
+            PintarBtnEventos();
+        }
+    }//GEN-LAST:event_btnAristasActionPerformed
+
+    private void btnTrampasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrampasActionPerformed
+        if (esPintarMapa) {
+            eventoPintar = eventoPintar != PINTAR_TRAMPA ? PINTAR_TRAMPA : 0;
+            PintarBtnEventos();
+        }
+    }//GEN-LAST:event_btnTrampasActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyPressed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+        if(juego.posVerticeSeleccionado>=0){
+            
+        }
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        // TODO add your handling code here:
+        esDragged=false;
+    }//GEN-LAST:event_formMouseReleased
+
+    private void PintarBtnEventos() {
+        if (eventoPintar == PINTAR_VERTICE) {
+            this.btnVertices.setBackground(Color.blue);
+            this.btnVertices.setForeground(Color.white);
+        } else {
+            this.btnVertices.setBackground(Color.lightGray);
+            this.btnVertices.setForeground(Color.black);
+        }
+
+        if (eventoPintar == PINTAR_ARISTA) {
+            this.btnAristas.setBackground(Color.blue);
+            this.btnAristas.setForeground(Color.white);
+        } else {
+            this.btnAristas.setBackground(Color.lightGray);
+            this.btnAristas.setForeground(Color.black);
+        }
+
+        if (eventoPintar == PINTAR_TRAMPA) {
+            this.btnTrampas.setBackground(Color.blue);
+            this.btnTrampas.setForeground(Color.white);
+        } else {
+            this.btnTrampas.setBackground(Color.lightGray);
+            this.btnTrampas.setForeground(Color.black);
+        }
+
+    }
 
     /**
      * @param args the command line arguments
@@ -125,5 +357,12 @@ public class JuegoFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAristas;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnIniciarJuego;
+    private javax.swing.JButton btnNuevoMapa;
+    private javax.swing.JButton btnTrampas;
+    private javax.swing.JButton btnVertices;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
