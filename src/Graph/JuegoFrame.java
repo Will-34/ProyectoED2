@@ -178,13 +178,13 @@ public class JuegoFrame extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        System.out.println("click x:" + evt.getX());
-        System.out.println("click y:" + evt.getY());
         int x = evt.getX();
         if(x<=120){
             return;
         }
         x=x-120;
+        System.out.println("click x:" + x);
+        System.out.println("click y:" + evt.getY());
         
         int y = evt.getY();
         Graphics g = this.getGraphics();
@@ -206,9 +206,21 @@ public class JuegoFrame extends javax.swing.JFrame {
                     }
                 }
             }else if(eventoPintar==PINTAR_TRAMPA){
-                
+                int[] aristaTrampa = lienzo.buscarArista(juego, x, y);
+                if(aristaTrampa!=null){
+                    System.out.println("trampas: " +aristaTrampa[0]+" - "+ aristaTrampa[1]);
+                    juego.setTrampa(aristaTrampa[0], aristaTrampa[1]);
+               }
             }else{// seleccionar
                 juego.posVerticeSeleccionado = lienzo.buscarVertice(juego, x,y);
+                if(juego.posVerticeSeleccionado==-1){
+                    juego.aristaSeleccionada = lienzo.buscarArista(juego, x, y);
+                    if(juego.aristaSeleccionada!=null){
+                        System.out.println("aristas de: "+ juego.aristaSeleccionada[0] +", " + juego.aristaSeleccionada[1]);
+                    }
+                }else{
+                    juego.aristaSeleccionada = null;
+                }
             }
             lienzo.pintarMapa(juego,g);
             
@@ -280,10 +292,10 @@ public class JuegoFrame extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         
-        if(juego.posVerticeSeleccionado>=0){
-            
+        if(juego.aristaSeleccionada!=null){
+            juego.deleteTunel(juego.aristaSeleccionada[0], juego.aristaSeleccionada[1]);
+            lienzo.pintarMapa(juego, this.getGraphics());
         }
-        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased

@@ -20,6 +20,7 @@ public class JuegoRaton {
     public int raton = -1;
     
     int posVerticeSeleccionado;
+    int[] aristaSeleccionada;
     
     
     public boolean finJuego;
@@ -30,7 +31,6 @@ public class JuegoRaton {
         this.mapa = new Grafo();
         this.posVerticeSeleccionado=-1;
     }
- 
     
     public void addCueva(int x, int y){
      
@@ -49,8 +49,9 @@ public class JuegoRaton {
     
     public void addTunel( int u, int v ){
         mapa.addArista(u,v);
-        mapa.printListas();
-        
+    }
+    public void deleteTunel( int u, int v ){
+        mapa.delArista(u,v);
     }
     public void setTrampa( int u, int v ){
         mapa.setTrampaArista(u,v);
@@ -61,13 +62,7 @@ public class JuegoRaton {
     public void setSalida(int v){
         mapa.setSalida(v);
     }
-    
-    
-    
-    //
-    
-    // jugar
-    
+
     public void iniciarRaton(int v){
         if(v==-1){
             raton = mapa.getEntrada();

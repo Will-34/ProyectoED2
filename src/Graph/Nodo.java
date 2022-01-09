@@ -33,7 +33,7 @@ public class Nodo {     //Nodo que usa la class Lista
         this.esTrampa = esTrampa;
     }
 
-    public boolean isEsTrampa() {
+    public boolean getEsTrampa() {
         return esTrampa;
     }
     

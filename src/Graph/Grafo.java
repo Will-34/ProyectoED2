@@ -83,8 +83,17 @@ public class Grafo {  //Grafo NO-Dirigido
                 return;     //No existe el vertice u o el vertice v.
         }
         
-        V[u].getNodo(v).setEsTrampa(true);
-        V[v].getNodo(u).setEsTrampa(true);
+        V[u].getNodoByElement(v).setEsTrampa(true);
+        V[v].getNodoByElement(u).setEsTrampa(true);
+    }
+    public void delTrampaArista(int u, int v){
+        String metodo="set Trampa";
+        if (!isVerticeValido(u, metodo) || !isVerticeValido(v, metodo)){
+                return;     //No existe el vertice u o el vertice v.
+        }
+        
+        V[u].getNodo(v).setEsTrampa(false);
+        V[v].getNodo(u).setEsTrampa(false);
     }
     
     public void addArista(int u, int v){
