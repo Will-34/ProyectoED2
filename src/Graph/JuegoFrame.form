@@ -31,7 +31,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="832" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="842" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -51,23 +51,21 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="btnNuevoMapa" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="btnIniciarJuego" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
+                      <Component id="btnNuevoMapa" max="32767" attributes="0"/>
+                      <Component id="btnJuego" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnVertices" max="32767" attributes="0"/>
-                                  <Component id="btnAristas" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="btnTrampas" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnIniciarJuego" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnSalida" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnEliminar" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnVertices" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnAristas" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnTrampas" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnOrdenar" max="32767" attributes="0"/>
+                              <Component id="btnInicio" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -84,12 +82,20 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnAristas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnTrampas" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTrampas" min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnOrdenar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="123" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                  <Component id="btnJuego" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnInicio" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnSalida" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnIniciarJuego" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
+                  <EmptySpace pref="118" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -103,10 +109,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoMapaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnIniciarJuego">
+        <Component class="javax.swing.JButton" name="btnJuego">
           <Properties>
             <Property name="text" type="java.lang.String" value="Jugar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnJuegoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVertices">
           <Properties>
@@ -126,7 +135,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnTrampas">
           <Properties>
-            <Property name="text" type="java.lang.String" value="trampas"/>
+            <Property name="text" type="java.lang.String" value="Trampas"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrampasActionPerformed"/>
@@ -134,10 +143,42 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnEliminar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Eliminar"/>
+            <Property name="text" type="java.lang.String" value="Eliminar T."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnOrdenar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ordenar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrdenarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSalida">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C. Salida"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalidaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnInicio">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C. Inicio"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInicioActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnIniciarJuego">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Iniciar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarJuegoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
