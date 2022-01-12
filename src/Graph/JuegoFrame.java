@@ -73,6 +73,7 @@ public class JuegoFrame extends javax.swing.JFrame {
         btnSalida = new javax.swing.JButton();
         btnInicio = new javax.swing.JButton();
         btnIniciarJuego = new javax.swing.JButton();
+        btnRutaSalida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -164,6 +165,13 @@ public class JuegoFrame extends javax.swing.JFrame {
             }
         });
 
+        btnRutaSalida.setText("Ruta Salida");
+        btnRutaSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRutaSalidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -184,6 +192,10 @@ public class JuegoFrame extends javax.swing.JFrame {
                             .addComponent(btnOrdenar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnRutaSalida)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +220,9 @@ public class JuegoFrame extends javax.swing.JFrame {
                 .addComponent(btnSalida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnIniciarJuego)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(btnRutaSalida)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -416,11 +430,12 @@ public class JuegoFrame extends javax.swing.JFrame {
                     juego.raton=juego.cuevaInicio;
                     juego.esFinJuego=false;
                     juego.esRatonVivo=true;
+                    juego.rutaSalida=new LinkedList<>();
                 }else{
                     juego.raton=-1;
                     juego.esFinJuego=true;
                     juego.esRatonVivo=false;
-
+                    juego.rutaSalida=new LinkedList<>();
                 }
                 
                 PintarBtnEventos();
@@ -429,6 +444,23 @@ public class JuegoFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnIniciarJuegoActionPerformed
+
+    private void btnRutaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaSalidaActionPerformed
+        if(juego.rutaSalida.size()==0){
+            boolean haySalida = juego.buscarRutaSalida();
+            if(haySalida){
+                lienzo.pintarJuego(juego, this.getGraphics());
+            }else{
+                JOptionPane.showMessageDialog(this, "No existe salida");
+            }
+        }else{
+            juego.rutaSalida=new LinkedList<Integer>();
+            lienzo.pintarJuego(juego, this.getGraphics());
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnRutaSalidaActionPerformed
 
     private void PintarBtnJuegoDibujo() {
         if (esDibujarMapa) {
@@ -565,6 +597,7 @@ public class JuegoFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnJuego;
     private javax.swing.JButton btnNuevoMapa;
     private javax.swing.JButton btnOrdenar;
+    private javax.swing.JButton btnRutaSalida;
     private javax.swing.JButton btnSalida;
     private javax.swing.JButton btnTrampas;
     private javax.swing.JButton btnVertices;

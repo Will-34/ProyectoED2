@@ -14,6 +14,7 @@ public class Grafo {  //Grafo NO-Dirigido
 
        marca = new boolean[MAXVERTEX+1];    //Iniciar la ED para el marcado de los vértices.
        coordenadas = new Coordenada[MAXVERTEX+1];    //Iniciar la ED para el marcado de los vértices.
+       padres = new int[MAXVERTEX+1];    //Iniciar la ED para el marcado de los vértices.
     }
     
     public Lista[] getVertices(){
@@ -150,9 +151,43 @@ public class Grafo {  //Grafo NO-Dirigido
         
         for (int i = 0; i < V[v].length(); i++) {   //for (cada w adyacente a v)
             int w = V[v].get(i);
-            
             if (!isMarcado(w))
                 dfs1(w);
+        }
+    }
+
+    public void dfsForestSinTrampa(){  //Recorrido DFS-Forest sin trampas
+        desmarcarTodos();
+        limpiarPadres();
+        System.out.print("DFS-F Sin trampas:");
+        for (int v = 0; v < n; v++) {
+            if (!isMarcado(v)){
+                dfsSintrampa1(v);
+            }
+        }
+        System.out.println();
+    }
+    
+    public void dfsSinTrampa(int v){  //Recorrido DFS-Forest sin trampas
+        desmarcarTodos();
+        limpiarPadres();
+        System.out.print("DFS-F Sin trampas:");
+        dfsSintrampa1(v);
+        System.out.println();
+    }
+    
+    private void dfsSintrampa1(int v){  //mask-function de void dfs(int)
+        System.out.print(" "+v);
+        marcar(v);
+        for (int i = 0; i < V[v].length(); i++) {   //for (cada w adyacente a v)
+            int w = V[v].get(i);
+            if (!isMarcado(w)){
+                boolean esTrampa = V[v].getNodo(i).getEsTrampa();
+                if(!esTrampa){
+                    padres[w]=v;
+                    dfsSintrampa1(w);
+                }
+            }
         }
     }
     
@@ -244,7 +279,16 @@ public class Grafo {  //Grafo NO-Dirigido
 
 //********* Para el marcado de los vértices
     private boolean marca[];
+    public int padres[];
+    public int[] getPadres() {
+        return padres;
+    }
     
+    private void limpiarPadres(){
+        for (int i = 0; i <= n; i++) {
+            padres[i] = -1;  
+        }
+    }
     private void desmarcarTodos(){
         for (int i = 0; i <= n; i++) {
             marca[i] = false;  

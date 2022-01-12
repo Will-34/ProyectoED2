@@ -185,8 +185,21 @@ public class Lienzo {
                 if(verticesRelacionados.getNodo(j).getEsTrampa()){
                     ig.setColor(Color.gray);
                 }
-                this.drawTunel(pos, pos2, ig);
-                //ig.drawLine(pos.x, pos.y, pos2.x, pos2.y);
+                this.drawTunel(pos, pos2, ig,null);
+            }
+        }
+        
+        // pintar salida
+        if(juego.rutaSalida!=null && juego.rutaSalida.size()>0){
+            int rutaSalidaSize = juego.rutaSalida.size();
+            for (int i = 0; i < rutaSalidaSize; i++) { // pintar salida
+                int v=juego.rutaSalida.get(i);
+                if(i+1<rutaSalidaSize){
+                    int w = juego.rutaSalida.get(i+1);
+                    Coordenada pos1= juego.mapa.getCoordenada(v);
+                    Coordenada pos2= juego.mapa.getCoordenada(w);
+                    this.drawTunel(pos1, pos2, ig,Color.green);
+                }
             }
         }
         
@@ -195,7 +208,6 @@ public class Lienzo {
             if(juego.cuevaInicio==v){
                 ig.drawImage(imgPartida, pos.x - (this.VerticeDiametro / 2), pos.y - (this.VerticeDiametro / 2), null);
             }else if (juego.cuevaSalida==v){
-            
                 ig.drawImage(imgSalida, pos.x - (this.VerticeDiametro / 2), pos.y - (this.VerticeDiametro / 2), null);
             }else{
                 ig.drawImage(imgCueva, pos.x - (this.VerticeDiametro / 2), pos.y - (this.VerticeDiametro / 2), null);
@@ -219,11 +231,11 @@ public class Lienzo {
                 ig.drawString("You Win!!!", posRaton.x-20, posRaton.y+35);
             }
         }
-
+        
         g.drawImage(image, 120, 0, null);
     }
     
-    public void drawTunel(Coordenada pos1, Coordenada pos2,Graphics ig ){
+    public void drawTunel(Coordenada pos1, Coordenada pos2,Graphics ig , Color color){
         int fun = 1; // f(x): calcular y
         if(Math.abs(pos1.y-pos2.y)> Math.abs(pos1.x-pos2.x)){
             fun = 2;//f(y): calcular x
@@ -248,7 +260,12 @@ public class Lienzo {
             int px=xi;
             while(px<=xf){
                 int fx = ((pos2.y-pos1.y)*(px-pos1.x))/(pos2.x-pos1.x) + pos1.y;
-                ig.setColor(Color.gray);
+                if(color==null){
+                    ig.setColor(Color.gray);
+                }else{
+                    ig.setColor(color);
+                }
+                
                 ig.fillOval(px, fx, 10, 10);
                 px=px+6;
             }
@@ -256,7 +273,11 @@ public class Lienzo {
             int py=yi;
             while(py<=yf){
                 int fy = ((pos2.x-pos1.x)*(py-pos1.y))/(pos2.y-pos1.y) + pos1.x;
-                ig.setColor(Color.gray);
+                if(color==null){
+                    ig.setColor(Color.gray);
+                }else{
+                    ig.setColor(color);
+                }
                 ig.fillOval(fy,py , 10, 10);
                 py=py+6;
             }
