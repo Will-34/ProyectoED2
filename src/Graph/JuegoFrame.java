@@ -25,6 +25,7 @@ public class JuegoFrame extends javax.swing.JFrame {
     public static int EVENTO_PINTAR_TRAMPA = 3;
     public static int EVENTO_ORDENAR = 4;
     public static int EVENTO_ELIMINAR_TUNEL = 5;
+    public static int EVENTO_ELIMINAR_VERTICE = 6;
 
     public static int EVENTO_INICIO = 6;
     public static int EVENTO_SALIDA = 7;
@@ -250,8 +251,8 @@ public class JuegoFrame extends javax.swing.JFrame {
             return;
         }
         x = x - 120;
-        System.out.println("click x:" + x);
-        System.out.println("click y:" + evt.getY());
+//        System.out.println("click x:" + x);
+//        System.out.println("click y:" + evt.getY());
 
         int y = evt.getY();
         Graphics g = this.getGraphics();
@@ -306,6 +307,10 @@ public class JuegoFrame extends javax.swing.JFrame {
                         int result = juego.moverRaton(posNuevaRaton);
                         if(result==2){
                             JOptionPane.showMessageDialog(this, "Movimiento Invalido");
+                        }else if(result == 3){
+                            JOptionPane.showMessageDialog(this, "Pisaste una trampa, PERDISTE");
+                        }else if(result == 9){
+                            JOptionPane.showMessageDialog(this, "GANASTEE!!");
                         }
                     }
                 }else{
@@ -351,6 +356,9 @@ public class JuegoFrame extends javax.swing.JFrame {
         this.esDibujarMapa = true;
         this.esJugar = false;
         this.eventoLienzo = 0;
+        juego.cuevaInicio=-1;
+        juego.cuevaSalida=-1;
+        juego.raton =-1;
         PintarBtnEventos();
         PintarBtnJuegoDibujo();
     }//GEN-LAST:event_btnNuevoMapaActionPerformed
@@ -383,6 +391,8 @@ public class JuegoFrame extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (esDibujarMapa) {
             eventoLienzo = eventoLienzo != EVENTO_ELIMINAR_TUNEL ? EVENTO_ELIMINAR_TUNEL : 0;
+            
+            
             PintarBtnEventos();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -446,18 +456,24 @@ public class JuegoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarJuegoActionPerformed
 
     private void btnRutaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaSalidaActionPerformed
-        if(juego.rutaSalida.size()==0){
-            boolean haySalida = juego.buscarRutaSalida();
-            if(haySalida){
-                lienzo.pintarJuego(juego, this.getGraphics());
+     
+        if(juego.raton!= -1){
+            if(juego.rutaSalida.size()==0){
+                boolean haySalida = juego.buscarRutaSalida();
+                if(haySalida){
+                    lienzo.pintarJuego(juego, this.getGraphics());
+                }else{
+                    JOptionPane.showMessageDialog(this, "No existe salida");
+                }
             }else{
-                JOptionPane.showMessageDialog(this, "No existe salida");
+                juego.rutaSalida=new LinkedList<Integer>();
+                lienzo.pintarJuego(juego, this.getGraphics());
             }
         }else{
-            juego.rutaSalida=new LinkedList<Integer>();
-            lienzo.pintarJuego(juego, this.getGraphics());
+            JOptionPane.showMessageDialog(this, "Debe iniciar la partida");
         }
-        
+            
+
         
         
     }//GEN-LAST:event_btnRutaSalidaActionPerformed

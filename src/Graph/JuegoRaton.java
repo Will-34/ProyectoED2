@@ -150,6 +150,7 @@ public class JuegoRaton {
         if(posNuevaRaton==cuevaSalida){
             esFinJuego = true;
             esRatonVivo = true;
+            return 9;
         }
         return 1;
     }

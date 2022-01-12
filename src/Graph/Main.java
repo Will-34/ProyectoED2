@@ -29,12 +29,29 @@ public class Main {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
+        Grafo g = new Grafo();
+        g.addVertice();
+        g.addVertice();
+        g.addVertice();
+        g.addVertice();
+        g.addVertice();
+        
+        g.addArista(0, 1);
+        g.addArista(0, 2);
+        g.addArista(2, 3);
+        g.addArista(3, 4);
+        g.printListas();
+        
+        g.eliminarVertice(3);
+        System.out.println("------eliminar vertice 3-----------");
+        g.printListas();
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JuegoFrame().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new JuegoFrame().setVisible(true);
+//            }
+//        });
     }
 }

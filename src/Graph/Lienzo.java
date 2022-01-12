@@ -131,6 +131,7 @@ public class Lienzo {
                     ig.setColor(Color.blue);
                 }
                 ig.drawLine(pos.x, pos.y, pos2.x, pos2.y);
+                
             }
         }
         

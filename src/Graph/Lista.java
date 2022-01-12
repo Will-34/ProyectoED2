@@ -26,13 +26,11 @@ public class Lista {    //ADT Lista (Ordenada y sin duplicados).
             nuevo.setLink(L);
             L = nuevo;
             n++;
-        } else {
-            if (Ant.getData() != x) {    //x no está en la lista.  Insertarlo entre Ant y p
-                nuevo = new Nodo(x);
-                Ant.setLink(nuevo);
-                nuevo.setLink(p);
-                n++;
-            }
+        } else if (Ant.getData() != x) {    //x no está en la lista.  Insertarlo entre Ant y p
+            nuevo = new Nodo(x);
+            Ant.setLink(nuevo);
+            nuevo.setLink(p);
+            n++;
         }
     }
 
@@ -57,6 +55,29 @@ public class Lista {    //ADT Lista (Ordenada y sin duplicados).
         }
     }
 
+    public int indexof(int data) {     //Elimina el nodo con Data=data, si existe.
+        Nodo Ant = null;
+        Nodo p = L;
+        int i = 0;
+
+        while (p != null && data > p.getData()) {
+            Ant = p;
+            p = p.getLink();
+            i++;
+        }
+
+        if (p != null && p.getData() == data) {  //data existe en la Lista 
+            if (Ant == null) {
+                return 0;    //data era el primero de la Lista
+            } else {
+                return i;
+            }
+
+        } else {
+            return -1;
+        }
+    }
+
     public boolean existe(int x) {
         Nodo p = L;
 
@@ -72,7 +93,7 @@ public class Lista {    //ADT Lista (Ordenada y sin duplicados).
         while (p != null && x > p.getData()) {
             p = p.getLink();
         }
-        if (p!=null && p.getData() == x) {
+        if (p != null && p.getData() == x) {
             return p;
         } else {
             return null;
