@@ -286,10 +286,17 @@ public class JuegoFrame extends javax.swing.JFrame {
                 juego.posVerticeSeleccionado = lienzo.buscarVertice(juego, x, y);
 
             } else if (eventoLienzo == EVENTO_ELIMINAR_TUNEL) {
-                int[] aristaEliminar = lienzo.buscarArista(juego, x, y);
-                if (aristaEliminar != null) {
-                    juego.deleteTunel(aristaEliminar[0], aristaEliminar[1]);
+                
+                int posVerticeSel = -1 ; //lienzo.buscarVertice(juego, x, y);
+                if(posVerticeSel>-1){
+                    juego.eliminarCueva(posVerticeSel);
+                }else{
+                    int[] aristaEliminar = lienzo.buscarArista(juego, x, y);
+                    if (aristaEliminar != null) {
+                        juego.deleteTunel(aristaEliminar[0], aristaEliminar[1]);
+                    }
                 }
+                
             }
             lienzo.pintarMapa(juego, g);
 
@@ -344,7 +351,7 @@ public class JuegoFrame extends javax.swing.JFrame {
                 esDragged = true;
             }
             if (juego.posVerticeSeleccionado >= 0) {
-                juego.moverVertice(juego.posVerticeSeleccionado, x, y);
+                juego.moverCueva(juego.posVerticeSeleccionado, x, y);
                 lienzo.pintarMapa(juego, g);
             }
         }
@@ -359,6 +366,8 @@ public class JuegoFrame extends javax.swing.JFrame {
         juego.cuevaInicio=-1;
         juego.cuevaSalida=-1;
         juego.raton =-1;
+        juego.esFinJuego=false;
+        juego.esRatonVivo=true;
         PintarBtnEventos();
         PintarBtnJuegoDibujo();
     }//GEN-LAST:event_btnNuevoMapaActionPerformed

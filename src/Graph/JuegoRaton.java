@@ -46,9 +46,12 @@ public class JuegoRaton {
         System.out.println("añadido: " + x + " - " + y);
     }
 
-    public void moverVertice(int v, int x, int y) {
+    public void moverCueva(int v, int x, int y) {
         mapa.getCoordenada(v).x = x;
         mapa.getCoordenada(v).y = y;
+    }
+    public void eliminarCueva(int v) {
+        mapa.eliminarVertice(v);
     }
 
     public void addTunel(int u, int v) {

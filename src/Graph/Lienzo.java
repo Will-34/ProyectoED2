@@ -227,9 +227,11 @@ public class Lienzo {
         
         if(juego.esFinJuego){
             if(juego.esRatonVivo){
-                Coordenada posRaton = juego.mapa.getCoordenada(juego.raton);
-                ig.setColor(Color.green);
-                ig.drawString("You Win!!!", posRaton.x-20, posRaton.y+35);
+                if(juego.raton>-1){
+                    Coordenada posRaton = juego.mapa.getCoordenada(juego.raton);
+                    ig.setColor(Color.green);
+                    ig.drawString("You Win!!!", posRaton.x-20, posRaton.y+35);
+                }
             }
         }
         

@@ -240,6 +240,15 @@ public class Grafo {  //Grafo NO-Dirigido
                 V[i].del(posVerticeAEliminar);
             }
         }
+        for (int i = 0; i <= n; i++) {
+            int len = V[i].length();
+            for (int j = 0; j < len; j++) {
+                int u = V[i].get(j);
+                if(u>posVerticeAEliminar){
+                    V[i].getNodo(j).Data=u-1;
+                }
+            }
+        }
     }
 
     public void printListas() {  //Muestra las listas del Grafo.  Util para el programador de esta class
